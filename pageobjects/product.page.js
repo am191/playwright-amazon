@@ -10,5 +10,12 @@ exports.ProductPage = class ProductPage {
         this.addToCartBtn = page.locator('#add-to-cart-button')
         this.buyNowBtn = page.locator('#buy-now-button')
         this.productTitle = page.locator('span#productTitle')
+        this.sizeDropdown = page.locator('#dropdown_selected_size_name')
+
+    }
+
+    async selectSize(value) {
+        await this.sizeDropdown.click()
+        await this.page.getByLabel(value).getByText(value).click();
     }
 }

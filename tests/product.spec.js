@@ -19,8 +19,7 @@ test.describe('Product page option tests',() => {
     await expect(cartBtnStyle).toContain('cursor: not-allowed')
 
     //select size
-    await page.locator('#dropdown_selected_size_name').click();
-    await page.getByLabel('Medium').getByText('Medium').click();
+    await productPage.selectSize('Medium')
 
     //assert add to cart action is available
     await expect(productPage.addToCartBtn).toBeVisible();
@@ -29,18 +28,19 @@ test.describe('Product page option tests',() => {
 
 
   test('Select product color',async({ page }) => {
-    //assert that color swatch has been changed to the selected
     //select swatch
     const firstSwatch = page.locator('.swatchAvailable').nth(1)
+    const firstSwatchName = await firstSwatch.getAttribute('title')
     await firstSwatch.click()
 
     //assert selected swatch name is reflected on page
     const optionName = await page.locator('.selection').innerText()
-    const firstSwatchName = await firstSwatch.getAttribute('title')
+
     try {
-      await expect(optionName).toContainText(firstSwatchName.replace('Click to select ', ''))
+      await expect(optionName).toMatch(firstSwatchName.replace('Click to select ', ''))
     } catch (error) {
       console.log(`visible option: ${optionName}, picked swatch name: ${firstSwatchName}`)
+      throw error
     }
   });
 
@@ -50,8 +50,7 @@ test.describe('Product page option tests',() => {
     const qty = 2
 
     //select size to show the block with qty option
-    await page.locator('#dropdown_selected_size_name').click();
-    await page.getByLabel('Medium').getByText('Medium').click();
+    await productPage.selectSize('Medium')
 
     //select quantity
     await page.getByText('Quantity:1').click() //no specific selector for qty dropdown

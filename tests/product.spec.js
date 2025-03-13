@@ -53,16 +53,14 @@ test.describe('Product page option tests',() => {
     await page.locator('#dropdown_selected_size_name').click();
     await page.getByLabel('Medium').getByText('Medium').click();
 
-    await page.getByText('Quantity').first().click()
-    await page.getByLabel(`quantity_${qty}`).click() //qty = 3
+    //select quantity
+    await page.getByText('Quantity:1').click() //no specific selector for qty dropdown
+    await page.locator(`#quantity_${qty}`).click() //select qty = 3
 
+    //assert quantity is changed
     const chosenQty = await page.getByText(/Quantity:\d+/).innerText()
-    const chosenQtyNum = Number(chosenQty.replace('Qunatity:', ''))
-
+    const chosenQtyNum = Number(chosenQty.replace('Quantity:', ''))
     expect(chosenQtyNum).toBe(qty+1)
-
-
-
   })
 
 })

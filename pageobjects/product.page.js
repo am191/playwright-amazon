@@ -9,5 +9,6 @@ exports.ProductPage = class ProductPage {
         this.page = page
         this.addToCartBtn = page.locator('#add-to-cart-button')
         this.buyNowBtn = page.locator('#buy-now-button')
+        this.productTitle = page.locator('span#productTitle')
     }
 }

@@ -5,7 +5,6 @@ import { ProductPage } from '../pageobjects/product.page';
 //pre-pick a product page so that page has all parameters for test
 test.beforeEach(async ({ page }) => {
   await page.goto('https://www.amazon.com/Saucony-Womens-Performance-Athletic-Assorted/dp/B09BKC9TNS?sr=8-23');
-  await page.waitForTimeout(5000) //explicit wait to avoid suspicious behaviour flags from amazon:)
 });
 
 

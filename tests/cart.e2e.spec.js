@@ -45,7 +45,6 @@ test('User searches for product, adds to cart and proceeds to checkout', async({
     })
 
     await test.step('User as a guest proceeds to checkout', async() => {
-        //await page.locator('input[name="proceedToRetailCheckout"]').click()
         await page.getByRole('button', { name: 'Proceed to checkout' }).click()
 
         //expect to see Sign in page
